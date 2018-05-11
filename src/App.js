@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import firebase from 'firebase';
 import reducers from './reducers';
 import { Header } from './components/common';
+import LoginForm from './components/LoginForm';
 
 class App extends Component {
   componentWillMount() {
@@ -25,6 +26,7 @@ class App extends Component {
       <Provider store={createStore(reducers)}>
         <View style={{ flex: 1 }}>
           <Header text="Manager" />
+          <LoginForm />
         </View>
       </Provider>
     );
