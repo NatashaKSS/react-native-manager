@@ -2,12 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import type { EmailChanged, PasswordChanged } from '../actions';
+import type { EmailChanged, PasswordChanged, LoginUser } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 type Props = {
   emailChanged: EmailChanged,
   passwordChanged: PasswordChanged,
+  loginUser: LoginUser,
   email: string,
   password: string,
 }
@@ -56,10 +57,12 @@ class LoginForm extends Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
-  email: state.auth.email,
-  password: state.auth.password,
-});
+const mapStateToProps = (state) => {
+  return {
+    email: state.auth.email,
+    password: state.auth.password,
+  };
+};
 
 export default connect(mapStateToProps,
   { emailChanged, passwordChanged, loginUser })(LoginForm);
