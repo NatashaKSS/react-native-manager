@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import type { EmailChanged, PasswordChanged, LoginUser } from '../actions';
-import { Card, CardSection, Input, Button } from './common';
+import { Card, CardSection, Input, Button, Spinner } from './common';
 
 type Props = {
   emailChanged: EmailChanged,
@@ -13,6 +13,7 @@ type Props = {
   email: string,
   password: string,
   error: string,
+  loading: boolean,
 }
 
 class LoginForm extends Component<Props> {
@@ -29,7 +30,7 @@ class LoginForm extends Component<Props> {
     this.props.loginUser({ email, password });
   }
 
-  renderError = () => {
+  renderError() {
     if (this.props.error) {
       return (
         <View style={{ backgroundColor: 'white' }}>
@@ -41,6 +42,15 @@ class LoginForm extends Component<Props> {
     }
 
     return null;
+  }
+
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+    return (
+      <Button onPress={this.onButtonPress}>Login</Button>
+    );
   }
 
   render() {
@@ -69,7 +79,7 @@ class LoginForm extends Component<Props> {
         {this.renderError()}
 
         <CardSection>
-          <Button onPress={this.onButtonPress}>Login</Button>
+          {this.renderButton()}
         </CardSection>
       </Card>
     );
@@ -84,11 +94,13 @@ const styles = {
   },
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ auth }) => {
+  const {
+    email, password, error, loading,
+  } = auth;
+
   return {
-    email: state.auth.email,
-    password: state.auth.password,
-    error: state.auth.error,
+    email, password, error, loading,
   };
 };
 
