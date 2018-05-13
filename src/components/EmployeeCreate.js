@@ -3,8 +3,17 @@ import { connect } from 'react-redux';
 import { Picker, Text } from 'react-native';
 import { Card, CardSection, Input, Button } from './common';
 import { employeeUpdate, employeeCreate } from '../actions';
+import type { EmployeeUpdateType, EmployeeCreateType } from '../actions';
 
-class EmployeeCreate extends Component {
+type Props = {
+  name: string,
+  phone: string,
+  shift: string,
+  employeeCreate: EmployeeUpdateType,
+  employeeUpdate: EmployeeCreateType,
+}
+
+class EmployeeCreate extends Component<Props> {
   onButtonPress = () => {
     const { name, phone, shift } = this.props;
 

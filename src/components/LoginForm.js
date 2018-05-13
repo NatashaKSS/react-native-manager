@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import type { EmailChanged, PasswordChanged, LoginUser } from '../actions';
+import type { EmailChangedType, PasswordChangedType, LoginUserType } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
 type Props = {
-  emailChanged: EmailChanged,
-  passwordChanged: PasswordChanged,
-  loginUser: LoginUser,
+  emailChanged: EmailChangedType,
+  passwordChanged: PasswordChangedType,
+  loginUser: LoginUserType,
   email: string,
   password: string,
   error: string,

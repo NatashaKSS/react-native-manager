@@ -8,7 +8,7 @@ import {
   LOGIN_USER,
 } from './types';
 
-export type EmailChanged = {
+export type EmailChangedType = {
   type: string,
   payload: string,
 };
@@ -20,7 +20,7 @@ export const emailChanged = (text) => {
   };
 };
 
-export type PasswordChanged = {
+export type PasswordChangedType = {
   type: string,
   payload: string,
 };
@@ -32,7 +32,7 @@ export const passwordChanged = (text) => {
   };
 };
 
-export type LoginUser = {
+export type LoginUserType = {
   type: string,
   payload: Object,
 };
@@ -44,7 +44,7 @@ export const loginUser = ({ email, password }) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
       .catch((error) => {
-        console.log(error);
+        console.log(error); // Important for catching firebase errors at all times
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(user => loginUserSuccess(dispatch, user))
@@ -53,7 +53,7 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
-const loginUserSuccess = (dispatch, user) => {
+const loginUserSuccess = (dispatch: Function, user: Object): void => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user,
@@ -61,7 +61,7 @@ const loginUserSuccess = (dispatch, user) => {
   Actions.main();
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = (dispatch: Function): void => {
   dispatch({
     type: LOGIN_USER_FAIL,
   });

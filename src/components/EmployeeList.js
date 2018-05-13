@@ -3,8 +3,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, View, Text } from 'react-native';
 import { employeesFetch } from '../actions';
+import type { EmployeesFetchType } from '../actions';
 
-class EmployeeList extends Component {
+type Props = {
+  employeesFetch: EmployeesFetchType,
+}
+
+class EmployeeList extends Component<Props> {
   componentWillMount() {
     this.props.employeesFetch();
 

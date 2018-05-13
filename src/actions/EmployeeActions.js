@@ -6,6 +6,14 @@ import {
   EMPLOYEES_FETCH_SUCCESS,
 } from './types';
 
+export type EmployeeUpdateType = {
+  type: string,
+  payload: {
+    prop: string,
+    value: string,
+  },
+};
+
 // 1 Action creator that can update any different property existing in our form
 export const employeeUpdate = ({ prop, value }) => {
   return {
@@ -13,6 +21,8 @@ export const employeeUpdate = ({ prop, value }) => {
     payload: { prop, value },
   };
 };
+
+export type EmployeeCreateType = (obj : Object) => (dispatch: Function) => Function;
 
 export const employeeCreate = ({ name, phone, shift }) => {
   const { currentUser } = firebase.auth();
@@ -26,6 +36,8 @@ export const employeeCreate = ({ name, phone, shift }) => {
       });
   };
 };
+
+export type EmployeesFetchType = () => (dispatch: Function) => Function;
 
 export const employeesFetch = () => {
   const { currentUser } = firebase.auth();
