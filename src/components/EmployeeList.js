@@ -20,9 +20,7 @@ class EmployeeList extends Component<Props> {
     return (
       <FlatList
         data={this.props.employees}
-        renderItem={({ item }) => {
-          return <ListItem employee={item} />;
-        }}
+        renderItem={({ item }) => <ListItem employee={item} />}
         keyExtractor={employee => employee.uid}
       />
     );
