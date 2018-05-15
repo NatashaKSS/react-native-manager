@@ -10,7 +10,7 @@ type Props = {
 
 class ListItem extends Component<Props> {
   onRowPress = () => {
-    Actions.employeeCreate({ employee: this.props.employee });
+    Actions.employeeEdit({ employee: this.props.employee });
   }
 
   render() {
