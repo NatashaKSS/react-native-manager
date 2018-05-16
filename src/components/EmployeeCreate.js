@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { employeeCreate } from '../actions';
+import { employeeCreate, employeeClearForm } from '../actions';
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
-import type { EmployeeCreateType } from '../actions';
+import type { EmployeeCreateType, EmployeeClearFormType } from '../actions';
 
 type Props = {
   name: string,
   phone: string,
   shift: string,
   employeeCreate: EmployeeCreateType,
+  employeeClearForm: EmployeeClearFormType,
 }
 
 class EmployeeCreate extends Component<Props> {
+  componentDidMount() {
+    this.props.employeeClearForm();
+  }
+
   onButtonPress = () => {
     const { name, phone, shift } = this.props;
 
@@ -38,4 +43,4 @@ const mapStateToProps = (state) => {
   return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeCreate })(EmployeeCreate);
+export default connect(mapStateToProps, { employeeCreate, employeeClearForm })(EmployeeCreate);
